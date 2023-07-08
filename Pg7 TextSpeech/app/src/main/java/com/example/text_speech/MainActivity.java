@@ -25,16 +25,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSpeak = findViewById(R.id.button);
         btnSpeak.setOnClickListener(this);
 
-        textToSpeech = new TextToSpeech(getBaseContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if(status != TextToSpeech.ERROR)
-                {
-                    Toast.makeText(getBaseContext(),"Success",Toast.LENGTH_LONG).show();
-                }
+        textToSpeech = new TextToSpeech(getBaseContext(), status -> {
+            if (status != TextToSpeech.ERROR) {
+                Toast.makeText(getBaseContext(), "Success", Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
     @Override

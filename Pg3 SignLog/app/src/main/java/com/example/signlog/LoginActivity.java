@@ -39,10 +39,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         String enteredUsername = usernameField.getText().toString();
         String enteredPassword = passwordField.getText().toString();
-        attempts++;
+
         if (enteredUsername.equals(username) && enteredPassword.equals(password)) {
             makeToast("Successful Login!");
         } else {
+            attempts++;
             if (attempts <= 2) {
                 makeToast("Incorrect login credentials");
             } else {

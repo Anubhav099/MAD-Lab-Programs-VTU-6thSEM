@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             while(running)
             {
-                cnt++;
                 handler.sendEmptyMessage(cnt);
+                cnt++;
                 try {
                     Thread.sleep(1000);
                 } catch (Exception e){}

@@ -6,74 +6,62 @@ import android.widget.TextView;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import java.io.InputStream;
-import javax.xml.parsers.DocumentBuilder;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 public class ViewActivity extends AppCompatActivity {
-    TextView lblXmlData,lblJsonData;
+    TextView txtXML, txtJSON;
     int mode=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
 
-        lblXmlData= findViewById(R.id.textView_xml);
-        lblJsonData= findViewById(R.id.textView_json);
+        txtXML = findViewById(R.id.textView_xml);
+        txtJSON = findViewById(R.id.textView_json);
 
         mode=getIntent().getIntExtra("mode",0);
-
         if(mode == 1) parseJson();
-        else parseXmlDocument();
+        else parseXml();
     }
-    public String parseXmlDocument()
+    public void parseXml()
     {
         try {
             InputStream is = getAssets().open("input.xml");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(is);
-            Element element=doc.getDocumentElement();
-            element.normalize();
+            Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
+
             NodeList nList = doc.getElementsByTagName("employee");
-            for(int i=0; i<nList.getLength(); i++)
-            {
-                Node node = nList.item(i);
-                if (node.getNodeType() == Node.ELEMENT_NODE)
-                {
-                    Element element2 = (Element) node;
-                    lblXmlData.setText("City Name : " + getValue("city_name", element2)+"\n");
-                    lblXmlData.append("Latitude : " + getValue("Latitude", element2)+"\n");
-                    lblXmlData.append("Longitude : " + getValue("Longitude", element2)+"\n");
-                    lblXmlData.append("Temperature : " + getValue("Temperature", element2)+"\n");
-                    lblXmlData.append("Humidity : " + getValue("Humidity", element2)+"\n");
-                }
-            }
+            Element elem = (Element)nList.item(0);
+
+            txtXML.setText("City Name : " + getValue("city_name", elem)+"\n");
+            txtXML.append("Latitude : " + getValue("Latitude", elem)+"\n");
+            txtXML.append("Longitude : " + getValue("Longitude", elem)+"\n");
+            txtXML.append("Temperature : " + getValue("Temperature", elem)+"\n");
+            txtXML.append("Humidity : " + getValue("Humidity", elem)+"\n");
+
         }
-        catch (Exception e) {e.printStackTrace();}
-        return null;
+        catch (Exception e) {}
     }
-    private static String getValue(String tag, Element element) {
-        NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
-        Node node = nodeList.item(0);
-        return node.getNodeValue();
+    public String getValue(String tag, Element elem) {
+        NodeList nList = elem.getElementsByTagName(tag).item(0).getChildNodes();
+        return nList.item(0).getNodeValue();
     }
     public void parseJson()
     {
         try {
-            InputStream inputStream=getAssets().open("input.json");
-            byte[] data=new byte[inputStream.available()];
-            inputStream.read(data);
-            String readData=new String(data);
-            JSONObject jsonObject=new JSONObject(readData);
-            JSONObject jsonObject1=jsonObject.getJSONObject("employee");
-            lblJsonData.setText("City Name : "+jsonObject1.getString("city_name")+"\n");
-            lblJsonData.append("Latitude : "+jsonObject1.getString("Latitude")+"\n");
-            lblJsonData.append("Longitude : "+jsonObject1.getString("Longitude")+"\n");
-            lblJsonData.append("Temperature : "+jsonObject1.getInt("Temperature")+"\n");
-            lblJsonData.append("Humidity : "+jsonObject1.getString("Humidity")+"\n");
+            InputStream is = getAssets().open("input.json");
+            byte[] data=new byte[is.available()];
+            is.read(data);
+            String str=new String(data);
+            JSONObject jsonObj=new JSONObject(str).getJSONObject("employee");
+
+            txtJSON.setText("City Name : "+jsonObj.getString("city_name")+"\n");
+            txtJSON.append("Latitude : "+jsonObj.getString("Latitude")+"\n");
+            txtJSON.append("Longitude : "+jsonObj.getString("Longitude")+"\n");
+            txtJSON.append("Temperature : "+jsonObj.getInt("Temperature")+"\n");
+            txtJSON.append("Humidity : "+jsonObj.getString("Humidity")+"\n");
         }
-        catch (Exception e) {e.printStackTrace();}
+        catch (Exception e) {}
     }
 }

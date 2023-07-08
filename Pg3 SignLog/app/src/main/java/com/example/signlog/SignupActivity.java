@@ -36,6 +36,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
+
         String username, password;
         username = usernameField.getText().toString();
         password = passwordField.getText().toString();

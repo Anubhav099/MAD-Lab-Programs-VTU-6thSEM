@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             R.drawable.img10,
             R.drawable.img11,
     };
-    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,18 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 WallpaperManager wm = WallpaperManager.getInstance(getBaseContext());
 
                 Random random = new Random();
-                i = random.nextInt(11);
-//                if(i==0) i=1;
-//                else if(i==1) i=2;
-//                else if(i==2) i=3;
-//                else if(i==3) i=4;
-//                else if(i==4) i=5;
-//                else if(i==5) i=6;
-//                else if(i==6) i=7;
-//                else if(i==7) i=8;
-//                else if(i==8) i=9;
-//                else if(i==9) i=10;
-//                else if(i==10) i=0;
+                int i = random.nextInt(11);
 
                 wm.setBitmap(BitmapFactory.decodeResource(getResources(),imagesArray[i]));
             }catch(Exception e){

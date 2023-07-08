@@ -20,17 +20,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
-        if(v.equals(btnParseJson))
-        {
-            Intent it=new Intent(this,ViewActivity.class);
-            it.putExtra("mode",1);
-            startActivity(it);
-        }
-        else if(v.equals(btnParseXml))
-        {
-            Intent it=new Intent(this,ViewActivity.class);
-            it.putExtra("mode",2);
-            startActivity(it);
-        }
+        Intent it=new Intent(this,ViewActivity.class);
+        if(v.equals(btnParseJson))  it.putExtra("mode",1);
+        else    it.putExtra("mode",2);
+        startActivity(it);
     }
 }

@@ -73,61 +73,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        if(v.equals(btnOne))
-        {
-            txtPhoneNumber.append("1");
-        }
-        else if(v.equals(btnTwo))
-        {
-            txtPhoneNumber.append("2");
-        }
-        else if(v.equals(btnThree))
-        {
-            txtPhoneNumber.append("3");
-        }
-        else if(v.equals(btnFour))
-        {
-            txtPhoneNumber.append("4");
-        }
-        else if(v.equals(btnFive))
-        {
-            txtPhoneNumber.append("5");
-        }
-        else if(v.equals(btnSix))
-        {
-            txtPhoneNumber.append("6");
-        }
-        else if(v.equals(btnSeven))
-        {
-            txtPhoneNumber.append("7");
-        }
-        else if(v.equals(btnEight))
-        {
-            txtPhoneNumber.append("8");
-        }
-        else if(v.equals(btnNine))
-        {
-            txtPhoneNumber.append("9");
-        }
-        else if(v.equals(btnZero))
-        {
-            txtPhoneNumber.append("0");
-        }
-        else if(v.equals(btnStar))
-        {
-            txtPhoneNumber.append("*");
-        }
-        else if(v.equals(btnHash))
-        {
-            txtPhoneNumber.append("#");
-        }
+        if(v.equals(btnOne))    txtPhoneNumber.append("1");
+        else if(v.equals(btnTwo))   txtPhoneNumber.append("2");
+        else if(v.equals(btnThree)) txtPhoneNumber.append("3");
+        else if(v.equals(btnFour))  txtPhoneNumber.append("4");
+        else if(v.equals(btnFive))  txtPhoneNumber.append("5");
+        else if(v.equals(btnSix))   txtPhoneNumber.append("6");
+        else if(v.equals(btnSeven)) txtPhoneNumber.append("7");
+        else if(v.equals(btnEight)) txtPhoneNumber.append("8");
+        else if(v.equals(btnNine))  txtPhoneNumber.append("9");
+        else if(v.equals(btnZero))  txtPhoneNumber.append("0");
+        else if(v.equals(btnStar))  txtPhoneNumber.append("*");
+        else if(v.equals(btnHash))  txtPhoneNumber.append("#");
         else if(v.equals(btnDel))
         {
             String data = txtPhoneNumber.getText().toString();
             if(data.length()>0)
-            {
+
                 txtPhoneNumber.setText(data.substring(0,data.length()-1));
-            }
+
             else    txtPhoneNumber.setText("");
         }
         else if(v.equals(btnSave))
