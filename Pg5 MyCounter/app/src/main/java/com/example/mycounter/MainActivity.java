@@ -2,10 +2,8 @@ package com.example.mycounter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,7 +12,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView txtCounter;
     Button btnStart, btnStop;
-    int cnt=0;
+    int cnt;
     boolean running = false;
 
     @Override
@@ -51,14 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @SuppressLint("HandlerLeak")
-    Handler handler = new Handler()
+    Handler handler = new Handler( msg ->
     {
-        public void handleMessage(Message m)
-        {
-            txtCounter.setText(String.valueOf(m.what));
-        }
-    };
+        txtCounter.setText(String.valueOf(msg.what));
+        return true;
+    });
 
     class MyCounter extends Thread
     {
@@ -67,10 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             while(running)
             {
                 handler.sendEmptyMessage(cnt);
+                try {Thread.sleep(1000);}
+                catch(Exception e){}
                 cnt++;
-                try {
-                    Thread.sleep(1000);
-                } catch (Exception e){}
             }
         }
     }
